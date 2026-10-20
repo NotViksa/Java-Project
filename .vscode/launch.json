@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Java Project",
+            "request": "launch",
+            "mainClass": "com.tu.javaproject.JavaProjectApplication",
+            "projectName": "java-project",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
