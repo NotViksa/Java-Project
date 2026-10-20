@@ -106,11 +106,7 @@ CREATE ROLE java_project LOGIN PASSWORD 'твоята_парола';
 CREATE DATABASE java_project OWNER java_project;
 ```
 
-### 3. Git
-
-Инсталирай Git от [git-scm.com](https://git-scm.com/downloads).
-
-### 4. Изтегли проекта
+### 3. Изтегли проекта
 
 Приеми поканата за GitHub repo-то. После в терминал:
 
@@ -121,7 +117,7 @@ cd Java-Project
 
 Отвори папката във Visual Studio (File → Open → Folder). Терминалът е на View → Terminal. Ако нямаш Visual Studio, изтегли го от [тук](https://visualstudio.microsoft.com/downloads/).
 
-### 5. Настрой `.env`
+### 4. Настрой `.env`
 
 Копирай `.env.example` като `.env`:
 
@@ -139,7 +135,7 @@ DB_PASSWORD=твоята_парола
 
 `.env` е в `.gitignore` и не се качва в GitHub.
 
-### 6. Стартирай
+### 5. Стартирай
 
 ```
 .\mvnw spring-boot:run
