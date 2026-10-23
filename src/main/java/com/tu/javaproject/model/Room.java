@@ -59,7 +59,8 @@ public class Room {
     @JoinTable(
             name = "room_extras",
             joinColumns = @JoinColumn(name = "room_id"),
-            inverseJoinColumns = @JoinColumn(name = "extra_id")
+            inverseJoinColumns = @JoinColumn(name = "extra_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"room_id", "extra_id"})
     )
     private Set<RoomExtra> extras = new HashSet<>();
 }

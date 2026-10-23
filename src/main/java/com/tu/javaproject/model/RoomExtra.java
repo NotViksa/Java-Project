@@ -17,7 +17,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "room_extras")
+@Table(name = "extras")
 @Getter
 @Setter
 @Builder
