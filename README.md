@@ -11,14 +11,14 @@
 
 ## Таблици
 
-| Entity | Полета | Връзки |
-| --- | --- | --- |
-| `Hotel` | id, name, city, address, description | една към много с `Room` |
-| `Room` | id, roomNumber, type, capacity, pricePerNight | много към едно с `Hotel`, много към много с `RoomExtra` |
-| `RoomExtra` | id, name | много към много с `Room` |
-| `Season` | id, name, startDate, endDate, priceMultiplier | без връзки |
-| `Guest` | id, firstName, lastName, email, phoneNumber | една към много с `Reservation` |
-| `Reservation` | id, checkInDate, checkOutDate, guestCount, totalPrice, status, createdAt | много към едно с `Guest` и `Room` |
+| Entity        | Полета                                                                   | Връзки                                                  |
+| ------------- | ------------------------------------------------------------------------ | ------------------------------------------------------- |
+| `Hotel`       | id, name, city, address, description                                     | една към много с `Room`                                 |
+| `Room`        | id, roomNumber, type, capacity, pricePerNight                            | много към едно с `Hotel`, много към много с `RoomExtra` |
+| `RoomExtra`   | id, name                                                                 | много към много с `Room`                                |
+| `Season`      | id, name, startDate, endDate, priceMultiplier                            | без връзки                                              |
+| `Guest`       | id, firstName, lastName, email, phoneNumber                              | една към много с `Reservation`                          |
+| `Reservation` | id, checkInDate, checkOutDate, guestCount, totalPrice, status, createdAt | много към едно с `Guest` и `Room`                       |
 
 `RoomExtra` са екстрите на стаята - WiFi, телевизор, климатик, закуска. Връзката е Many-to-Many и се пази в join table `room_extras`.
 
@@ -56,25 +56,25 @@
 
 ## Endpoint-и
 
-| Method | Path | Описание |
-| --- | --- | --- |
-| GET, POST | `/api/hotels` | Списък и създаване на хотели |
-| GET, PUT, DELETE | `/api/hotels/{id}` | Четене, редакция и изтриване на хотел |
-| GET, POST | `/api/rooms` | Всички стаи (може и по `hotelId`) и създаване на стая |
-| GET, PUT, DELETE | `/api/rooms/{id}` | Четене, редакция и изтриване на стая |
-| GET | `/api/rooms/available` | Свободни стаи по хотел, дати и брой гости |
-| GET, POST | `/api/extras` | Списък и създаване на екстри |
-| GET, PUT, DELETE | `/api/extras/{id}` | Четене, редакция и изтриване на екстра |
-| GET, POST | `/api/seasons` | Списък и създаване на сезони |
-| GET, PUT, DELETE | `/api/seasons/{id}` | Четене, редакция и изтриване на сезон |
-| GET, POST | `/api/guests` | Списък и създаване на гости |
-| GET, PUT, DELETE | `/api/guests/{id}` | Четене, редакция и изтриване на гост |
-| POST | `/api/reservations` | Създаване на резервация |
-| GET | `/api/reservations` | Всички резервации (може и по `guestId`) |
-| GET | `/api/reservations/{id}` | Една резервация по id |
-| PATCH | `/api/reservations/{id}/cancel` | Отказване на резервация |
-| PATCH | `/api/reservations/{id}/check-in` | Настаняване |
-| PATCH | `/api/reservations/{id}/check-out` | Освобождаване на стаята |
+| Method           | Path                               | Описание                                              |
+| ---------------- | ---------------------------------- | ----------------------------------------------------- |
+| GET, POST        | `/api/hotels`                      | Списък и създаване на хотели                          |
+| GET, PUT, DELETE | `/api/hotels/{id}`                 | Четене, редакция и изтриване на хотел                 |
+| GET, POST        | `/api/rooms`                       | Всички стаи (може и по `hotelId`) и създаване на стая |
+| GET, PUT, DELETE | `/api/rooms/{id}`                  | Четене, редакция и изтриване на стая                  |
+| GET              | `/api/rooms/available`             | Свободни стаи по хотел, дати и брой гости             |
+| GET, POST        | `/api/extras`                      | Списък и създаване на екстри                          |
+| GET, PUT, DELETE | `/api/extras/{id}`                 | Четене, редакция и изтриване на екстра                |
+| GET, POST        | `/api/seasons`                     | Списък и създаване на сезони                          |
+| GET, PUT, DELETE | `/api/seasons/{id}`                | Четене, редакция и изтриване на сезон                 |
+| GET, POST        | `/api/guests`                      | Списък и създаване на гости                           |
+| GET, PUT, DELETE | `/api/guests/{id}`                 | Четене, редакция и изтриване на гост                  |
+| POST             | `/api/reservations`                | Създаване на резервация                               |
+| GET              | `/api/reservations`                | Всички резервации (може и по `guestId`)               |
+| GET              | `/api/reservations/{id}`           | Една резервация по id                                 |
+| PATCH            | `/api/reservations/{id}/cancel`    | Отказване на резервация                               |
+| PATCH            | `/api/reservations/{id}/check-in`  | Настаняване                                           |
+| PATCH            | `/api/reservations/{id}/check-out` | Освобождаване на стаята                               |
 
 Ако хотелът има стаи, стаята има резервации или гостът има резервации, изтриването връща 409.
 
@@ -115,7 +115,7 @@ git clone https://github.com/NotViksa/Java-Project.git
 cd Java-Project
 ```
 
-Отвори папката във Visual Studio (File → Open → Folder). Терминалът е на View → Terminal. Ако нямаш Visual Studio, изтегли го от [тук](https://visualstudio.microsoft.com/downloads/).
+Отвори папката във Visual Studio (File → Open → Folder). Терминалът е на View → Terminal.
 
 ### 4. Настрой `.env`
 
@@ -184,3 +184,32 @@ DB_PASSWORD=твоята_парола
 6. Заедно: Swagger и README.
 
 След всяка стъпка проверяваме каквото е готово през Swagger.
+
+## Checklist - Надежда
+
+Пълното разпределение е по-горе. Това е checklist само за твоята част.
+
+### 1. Първо - reservation DTO/mapper и цени (тези ми трябват направени за да продължа моите неща)
+
+- `CreateReservationRequest`: `roomId`, `guestId`, `checkInDate`, `checkOutDate`, `guestCount`. Validation: `@NotNull`, `guestCount >= 1`, check-in днес или в бъдеще, check-out след check-in.
+- `ReservationDto`: `id`, `guestId`, `guestName`, `roomId`, `roomNumber`, `hotelId`, `hotelName`, дати, `guestCount`, `totalPrice`, `status`, `createdAt`.
+- `ReservationMapper`: `toDto(Reservation)` и `toEntity(request, Room, Guest)`. Игнорирай `id`, `totalPrice`, `status` и `createdAt` при създаване. `guestName` е `firstName + lastName`, а `hotelName` идва от `room.hotel.name`.
+- `PricingService.calculateTotal(Room, LocalDate, LocalDate)`: сезонна цена за всяка нощувка; 7+ нощувки → 10% върху общата сума; `BigDecimal`, `HALF_UP`, 2 знака.
+
+### 2. DTOs, mappers и CRUD
+
+- DTOs: `HotelDto(id, name, city, address, description)`, `RoomDto(id, roomNumber, type, capacity, pricePerNight, hotelId, extraIds)`, `RoomExtraDto(id, name)`, `SeasonDto(id, name, startDate, endDate, priceMultiplier)`, `GuestDto(id, firstName, lastName, email, phoneNumber)`.
+- Validation: задължителни полета, `capacity >= 1`, `pricePerNight > 0`, `priceMultiplier > 0`, `startDate <= endDate`, валиден email.
+- MapStruct: `toEntity` игнорира id и връзките; `toDto` трябва да върне `hotelId` и `extraIds`.
+- CRUD service и controller за хотели, стаи, екстри, сезони и гости. Endpoint-ите са в таблицата по-горе.
+- `POST` връща 201, `GET`/`PUT` - 200, `DELETE` - 204. Използвай `@Valid` и `@Transactional`.
+- Липсващ id → 404. Дублирани `roomNumber` в хотел, `email` или `extra.name` → 409. При update проверката е без текущия запис.
+- Изтриване с зависимости → 409: хотел със стаи, стая или гост с резервации, екстра, използвана от стая.
+- При create/update на стая: липсващ `hotelId` или `extraId` → 404. При update `extras` се заменят, не се добавят.
+
+### 3. Свободни стаи, сезони и Swagger
+
+- `GET /api/rooms/available` с `hotelId`, `checkInDate`, `checkOutDate` и `guestCount`. `hotelId` е задължителен.
+- Използвай `RoomRepository.findAvailable(..., ReservationStatus.CANCELLED)`. Валидирай датите и `guestCount`, после върни `List<RoomDto>`.
+- Сезоните не могат да се застъпват. При create/update → 409, без текущия season. Ако ти трябват repository методи, кажи на Виктор.
+- Swagger: `@Operation`, `@ApiResponse` и `@Parameter` за твоите CRUD endpoint-и и `/api/rooms/available`. Слагаш `@Schema` на DTO полетата.
