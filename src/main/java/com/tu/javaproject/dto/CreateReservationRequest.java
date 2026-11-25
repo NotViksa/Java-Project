@@ -1,5 +1,6 @@
 
 package com.tu.javaproject.dto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -30,7 +31,7 @@ public record CreateReservationRequest(
     Integer guestCount
 
 ) {
-
+    @JsonIgnore
     @AssertTrue(message = "Check-out must be after check-in")
     @Schema(hidden = true)
     public boolean isDateRangeValid() {

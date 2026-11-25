@@ -1,7 +1,18 @@
+
 package com.tu.javaproject.mapper;
 
-import org.mapstruct.Mapper;
+import com.tu.javaproject.dto.HotelDto;
+import com.tu.javaproject.model.Hotel;
 
-@Mapper
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+
+@Mapper(componentModel = "spring")
 public interface HotelMapper {
+
+    HotelDto toDto(Hotel hotel);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "rooms", ignore = true)
+    Hotel toEntity(HotelDto dto);
 }
